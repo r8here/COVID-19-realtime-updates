@@ -109,7 +109,8 @@ export default {
 			this.loadingCountries = true;
 			try {
 				var response = await axios.get(
-					"https://corona.lmao.ninja/countries"
+					// "https://corona.lmao.ninja/countries"
+					"https://coronavirus-19-api.herokuapp.com/countries"
 				);
 
 				this.countries = response.data;
@@ -128,7 +129,7 @@ export default {
 				this.fetchAll();
     			this.fetchCountries();
 				this.fetchAndRefreshData()
-			}, 10000)
+			}, 30000)
 		}
 	}
 };
