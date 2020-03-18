@@ -109,7 +109,8 @@ export default {
     fetchCountries: async function() {
       this.loadingConutries = true;
       try {
-        var response = await axios.get("https://corona.lmao.ninja/countries");
+        // var response = await axios.get("https://corona.lmao.ninja/countries");
+        var response = await axios.get("https://coronavirus-19-api.herokuapp.com/countries");
 
         this.countries = response.data;
         this.loadingConutries = false
@@ -167,6 +168,12 @@ a {
       border: 1px solid #07416f;
       padding: 5px;
     }
+  }
+}
+@media screen and (max-width: 500px){
+  ._3_col--grid, 
+  ._4_col--grid {
+    grid-template-columns: repeat(1, auto);
   }
 }
 </style>

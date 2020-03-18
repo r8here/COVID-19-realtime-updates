@@ -29,4 +29,9 @@ body {
   border: 1px solid #07416f;
   border-radius: 4px;
 }
+@media screen and (max-width: 500px){
+  body {
+    padding: 0 1rem
+  }
+}
 </style>
