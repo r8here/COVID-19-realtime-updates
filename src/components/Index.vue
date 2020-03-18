@@ -22,7 +22,7 @@
 
 		<div class="card">
 			<h2>India</h2>
-			<div class="_4_col--grid">
+			<div class="_5_col--grid">
 				<div>
 					Total Cases:
 					<h3>{{ getCountry('India').cases }}</h3>
@@ -39,6 +39,10 @@
 					Deaths:
 					<h3>{{ getCountry('India').deaths }}</h3>
 				</div>
+				<div>
+					Today Deaths:
+					<h3>{{ getCountry('India').todayDeaths }}</h3>
+				</div>
 			</div>
 		</div>
 
@@ -53,6 +57,8 @@
 					<th>Country</th>
 					<th>Cases</th>
 					<th>Today Cases</th>
+					<th>Deaths</th>
+					<th>Today Deaths</th>
 					<th>Recovered</th>
 				</thead>
 				<tbody slot="body" slot-scope="{ displayData }">
@@ -60,6 +66,8 @@
 						<td>{{ country.country }}</td>
 						<td>{{ country.cases }}</td>
 						<td>{{ country.todayCases }}</td>
+						<td>{{ country.deaths }}</td>
+						<td>{{ country.todayDeaths }}</td>
 						<td>{{ country.recovered }}</td>
 					</tr>
 				</tbody>
@@ -159,6 +167,14 @@ a {
 ._4_col--grid {
 	display: grid;
 	grid-template-columns: repeat(4, auto);
+	grid-gap: 0.5rem;
+	h3 {
+		margin: 1rem;
+	}
+}
+._5_col--grid {
+	display: grid;
+	grid-template-columns: repeat(5, auto);
 	grid-gap: 0.5rem;
 	h3 {
 		margin: 1rem;
