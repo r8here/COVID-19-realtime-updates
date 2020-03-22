@@ -1,6 +1,10 @@
 <template>
   <div id="app">
     <router-view />
+    <div class="source text-white fs12 ">
+      <br>
+      API Source: https://github.com/NovelCOVID/API
+    </div>
   </div>
 </template>
 
@@ -21,7 +25,11 @@ body {
     margin-top: 0;
   }
 }
-.text-white {
+
+.fs12 {
+  font-size: 12px;
+}
+a,.text-white {
   color: #fff;
 }
 .text-left {

@@ -1,6 +1,10 @@
 <template>
   <div>
     <div class="text-white mb-1">
+      <a href="//medlarge.com"><img src="https://i0.wp.com/medlarge.com/wp-content/uploads/2019/04/medlarge-Logo.png" alt="Medlarge Logo" width="200">
+      <br>
+        <strong>Browse all top stories.</strong>
+      </a>
       <h1 class="mb-0">
         COVID-19 CORONAVIRUS <small class="fs12">Live</small>
       </h1>
@@ -71,7 +75,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card affix">
       <label>Filter by: </label>
       <input
         class="form-control"
@@ -188,8 +192,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.fs12 {
-  font-size: 12px;
+.affix{
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;;
 }
 ._3_col--grid {
   display: grid;
