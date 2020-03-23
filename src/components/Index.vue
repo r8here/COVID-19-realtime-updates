@@ -1,10 +1,7 @@
 <template>
   <div>
+    <!-- Header -->
     <div class="text-white mb-1">
-      <a href="//medlarge.com"><img src="https://i0.wp.com/medlarge.com/wp-content/uploads/2019/04/medlarge-Logo.png" alt="Medlarge Logo" width="200">
-      <br>
-        <strong>Browse all top stories.</strong>
-      </a>
       <h1 class="mb-0">
         COVID-19 CORONAVIRUS <small class="fs12">Live</small>
       </h1>
@@ -12,6 +9,13 @@
         Auto refresh in 60s
       </small>
     </div>
+
+    <!-- Global data chart -->
+    <div class="card">
+      <DataChart />
+    </div>
+
+    <!-- Display global data -->
     <div v-if="!loadingAll" class="_3_col--grid">
       <h2 class="card">
         Total Cases:
@@ -29,6 +33,8 @@
         {{ all.deaths }}
       </h2>
     </div>
+
+    <!-- Placeholder loader -->
     <div v-else class="card">
       <content-loader
         width="300"
@@ -53,6 +59,7 @@
       </content-loader>
     </div>
 
+    <!-- Display single country data -->
     <div class="card country">
       <h2>India</h2>
       <div class="_4_col--grid">
@@ -75,6 +82,7 @@
       </div>
     </div>
 
+    <!-- Search field -->
     <div class="card affix">
       <label>Filter by: </label>
       <input
@@ -84,6 +92,7 @@
       />
     </div>
 
+    <!-- Display country-wise data -->
     <div class="table" v-if="!loadingCountries">
       <v-table class="text-white" :data="countries" :filters="filters">
         <thead slot="head">
@@ -103,6 +112,7 @@
       </v-table>
     </div>
 
+    <!-- Placeholder loader -->
     <div v-else class="card">
       <content-loader
         width="300"
@@ -125,11 +135,12 @@
 <script>
 import axios from "axios";
 import { ContentLoader } from "vue-content-loader";
-
+import DataChart from "./DataChart";
 export default {
   name: "Index",
   components: {
-    ContentLoader
+    ContentLoader,
+    DataChart
   },
   props: {
     msg: String
@@ -192,10 +203,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.affix{
+.affix {
   position: -webkit-sticky; /* Safari */
   position: sticky;
-  top: 0;;
+  top: 0;
 }
 ._3_col--grid {
   display: grid;
