@@ -1,6 +1,10 @@
 <template>
   <div id="app">
     <router-view />
+    <div class="source text-white fs12 ">
+      <br>
+      API Source: https://github.com/NovelCOVID/API
+    </div>
   </div>
 </template>
 
@@ -17,9 +21,28 @@ body {
   text-align: center;
   margin: 0;
   padding: 0;
+  h2 {
+    margin-top: 0;
+  }
 }
-.text-white {
+
+.fs12 {
+  font-size: 12px;
+}
+a,.text-white {
   color: #fff;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.mb-0 {
+  margin-bottom: 0;
+}
+.mb-1{
+  margin-bottom: 1rem;
 }
 .card {
   background-color: #032948;
@@ -28,5 +51,14 @@ body {
   margin-bottom: 1rem;
   border: 1px solid #07416f;
   border-radius: 4px;
+  margin-top: 0;
+}
+@media screen and (max-width: 500px){
+  body {
+    padding: 0 1rem
+  }
+  .card {
+    margin-bottom: 0.5rem;
+  }
 }
 </style>
