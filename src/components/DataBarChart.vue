@@ -1,31 +1,30 @@
 <template>
   <div class="small">
-    <line-chart
+    <h3>World</h3>
+    <Bar
       :chart-data="chartData"
       :options="{ responsive: true, maintainAspectRatio: false }"
     />
+    <hr class="divider" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import LineChart from "./LineChart.js"
+import Bar from "./BarChart";
 export default {
   name: "data-chart",
   components: {
-    LineChart
+    Bar
   },
-  props: ['chartData'],
+  props: ["chartData"],
   mounted() {
-    console.log()
+    console.log();
   },
   data() {
     return {
-	  loadingAll: true
+      loadingAll: true
     };
-  },
-  methods: {
-    
   }
 };
 </script>

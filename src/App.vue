@@ -2,7 +2,7 @@
   <div id="app">
     <router-view />
     <div class="source text-white fs12 ">
-      <br>
+      <br />
       API Source: https://github.com/NovelCOVID/API
     </div>
   </div>
@@ -11,7 +11,7 @@
 <style lang="scss">
 #app {
   max-width: 45rem;
-  margin: 1rem auto;
+  margin: 1rem;
 }
 body {
   background-color: #011627;
@@ -29,7 +29,8 @@ body {
 .fs12 {
   font-size: 12px;
 }
-a,.text-white {
+a,
+.text-white {
   color: #fff;
 }
 .text-left {
@@ -41,8 +42,13 @@ a,.text-white {
 .mb-0 {
   margin-bottom: 0;
 }
-.mb-1{
+.mb-1 {
   margin-bottom: 1rem;
+}
+.divider {
+  border: 0;
+  border-bottom: 1px solid #07416f;
+  height: 1px;
 }
 .card {
   background-color: #032948;
@@ -53,9 +59,9 @@ a,.text-white {
   border-radius: 4px;
   margin-top: 0;
 }
-@media screen and (max-width: 500px){
+@media screen and (max-width: 500px) {
   body {
-    padding: 0 1rem
+    padding: 0 1rem;
   }
   .card {
     margin-bottom: 0.5rem;
