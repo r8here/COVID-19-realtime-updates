@@ -21,7 +21,7 @@
 
     <!-- Global data chart -->
     <div class="card">
-      <DataChart />
+      <DataChart v-if='all' :chart-data="chartData" />
     </div>
 
     <!-- Display global data -->
@@ -158,7 +158,11 @@ export default {
     return {
       loadingAll: false,
       loadingCountries: false,
-      all: {},
+      all: {
+		  cases: 0,
+		  deaths: 0,
+		  recovered: 0,
+	  },
       countries: [],
       filters: {
         country: { value: "", keys: ["country"] }
@@ -169,6 +173,30 @@ export default {
     this.fetchAll();
     this.fetchCountries();
     this.fetchAndRefreshData();
+  },
+  computed: {
+	  chartData() {
+		  return {
+			  labels: ['COVID-19'],
+			  datasets: [
+				  {
+					  label: 'Cases',
+					  backgroundColor: 'orange',
+					  data: [this.all.cases]
+				  },				  
+				  {
+					  label: 'Recovered',
+					  backgroundColor: 'green',
+					  data: [this.all.recovered]
+				  },
+				  {
+					  label: 'Deaths',
+					  backgroundColor: 'red',
+					  data: [this.all.deaths]
+				  },
+			  ]
+		  }
+	  }
   },
   methods: {
     fetchAll: async function() {
@@ -229,6 +257,14 @@ export default {
   h3 {
     margin: 1rem;
   }
+}
+._5_col--grid {
+	display: grid;
+	grid-template-columns: repeat(5, auto);
+	grid-gap: 0.5rem;
+	h3 {
+		margin: 1rem;
+	}
 }
 .table {
   max-width: 45rem;
