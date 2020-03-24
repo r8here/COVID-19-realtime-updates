@@ -2,6 +2,15 @@
   <div>
     <!-- Header -->
     <div class="text-white mb-1">
+      <a href="//medlarge.com"
+        ><img
+          src="https://i0.wp.com/medlarge.com/wp-content/uploads/2019/04/medlarge-Logo.png"
+          alt="Medlarge Logo"
+          width="200"
+        />
+        <br />
+        <strong>Browse all top stories.</strong>
+      </a>
       <h1 class="mb-0">
         COVID-19 CORONAVIRUS <small class="fs12">Live</small>
       </h1>
