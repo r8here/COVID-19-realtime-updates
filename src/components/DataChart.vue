@@ -1,7 +1,7 @@
 <template>
   <div class="small">
     <line-chart
-      :chartData="data"
+      :chart-data="chartData"
       :options="{ responsive: true, maintainAspectRatio: false }"
     />
   </div>
@@ -9,19 +9,19 @@
 
 <script>
 import axios from "axios";
-import LineChart from "./LineChart.js";
+import LineChart from "./LineChart.js"
 export default {
-  name: "LineChartContainer",
+  name: "data-chart",
   components: {
     LineChart
   },
-  props: ['data'],
+  props: ['chartData'],
   mounted() {
-    
+    console.log()
   },
   data() {
     return {
-      loadingAll: true
+	  loadingAll: true
     };
   },
   methods: {
