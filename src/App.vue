@@ -10,7 +10,7 @@
 
 <style lang="scss">
 #app {
-  max-width: 45rem;
+  max-width: 65rem;
   margin: 1rem;
 }
 body {
@@ -25,7 +25,10 @@ body {
     margin-top: 0;
   }
 }
-
+header{
+  max-width: 45rem;
+  margin: auto;
+}
 .fs12 {
   font-size: 12px;
 }

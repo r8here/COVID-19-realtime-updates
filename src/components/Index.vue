@@ -1,7 +1,5 @@
 <template>
   <div>
-    <!-- Header -->
-   
     <div class="_2_col--grid">
       <!-- Left column -->
       <div>
@@ -238,7 +236,7 @@ export default {
 }
 ._2_col--grid {
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(auto-fit, minmax(320px, auto));
   grid-gap: 1rem;
 }
 ._3_col--grid {
@@ -291,7 +289,6 @@ export default {
   margin-top: 0.09rem;
 }
 @media screen and (max-width: 500px) {
-  ._2_col--grid,
   ._3_col--grid,
   ._4_col--grid {
     grid-template-columns: repeat(1, auto);
