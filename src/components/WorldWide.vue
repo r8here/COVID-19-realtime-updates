@@ -1,57 +1,73 @@
 <template>
   <div>
-    <!-- Display single country data -->
     <div class="card">
-      <h2>India</h2>
+      <!-- Display global data -->
+      <h2>World</h2>
       <hr class="divider" />
-      <div class="_4_col--grid">
+
+      <div v-if="!loadingAll" class="_3_col--grid">
         <h2 class="card fs-2">
           Total Cases:
-          <br />{{ getCountry("India").cases }}
+          <br />
+          {{ all.cases }}
         </h2>
         <h2 class="card fs-2">
-          Today Cases:
-          <br />{{ getCountry("India").todayCases }}
+          Total Recovered:
+          <br />
+          {{ all.recovered }}
         </h2>
         <h2 class="card fs-2">
-          Recovered:
-          <br />{{ getCountry("India").recovered }}
-        </h2>
-        <h2 class="card fs-2">
-          Deaths:
-          <br />{{ getCountry("India").deaths }}
+          Total Deaths:
+          <br />
+          {{ all.deaths }}
         </h2>
       </div>
+
+      <!-- Placeholder loader -->
+      <div v-else class="card">
+        <content-loader
+          width="300"
+          height="50"
+          :speed="2"
+          primaryColor="#032948"
+          secondaryColor="#07416f"
+        >
+          <rect x="1" y="0" rx="0" ry="0" width="295" height="6" />
+          <rect x="1" y="10" rx="0" ry="0" width="290" height="6" />
+          <rect x="1" y="20" rx="0" ry="0" width="295" height="6" />
+          <rect x="1" y="30" rx="0" ry="0" width="295" height="6" />
+        </content-loader>
+      </div>
+      <!-- Global data chart -->
       <div class="card">
-        <data-bar-chart v-if="this.countries" :chart-data="chartData" />
+        <data-bar-chart v-if="all" :chart-data="chartData" />
       </div>
+
       <!-- Search field -->
       <div class="card affix">
         <label>Filter by: </label>
         <input
           class="search-input"
-          v-model="filters.state.value"
-          placeholder="Indian State Name"
+          v-model="filters.country.value"
+          placeholder="Country Name"
         />
       </div>
 
-      <!-- Display State-wise data -->
-      <div class="table" v-if="!loadingState">
-        <v-table class="text-white" :data="states" :filters="filters">
+      <!-- Display country-wise data -->
+      <div class="table" v-if="!loadingCountries">
+        <v-table class="text-white" :data="countries" :filters="filters">
           <thead slot="head">
-            <th class="text-left">State</th>
-            <th>Cases <br /><small>(Inc. Foreigners)</small></th>
-            <th>Discharged/Recovered</th>
-            <th>Deaths</th>
+            <th class="text-left">Country</th>
+            <th>Cases</th>
+            <th>Today Cases</th>
+            <th>Recovered</th>
           </thead>
           <tbody slot="body" slot-scope="{ displayData }">
-            <tr v-for="(state, index) in displayData" :key="index">
-              <td class="text-left">{{ state.loc }}</td>
-              <td class="text-right">
-                {{ state.confirmedCasesIndian + state.confirmedCasesForeign }}
-              </td>
-              <td class="text-right">{{ state.discharged }}</td>
-              <td class="text-right">{{ state.deaths }}</td>
+            <tr v-for="(country, index) in displayData" :key="index">
+              <td class="text-left">{{ country.country }}</td>
+              <td class="text-right">{{ country.cases }}</td>
+              <td class="text-right">{{ country.todayCases }}</td>
+              <td class="text-right">{{ country.recovered }}</td>
             </tr>
           </tbody>
         </v-table>
@@ -83,7 +99,7 @@ import axios from "axios";
 import { ContentLoader } from "vue-content-loader";
 import DataBarChart from "./DataBarChart";
 export default {
-  name: "india-state",
+  name: "Index",
   components: {
     ContentLoader,
     DataBarChart
@@ -93,52 +109,57 @@ export default {
   },
   data() {
     return {
-      loadingState: false,
+      loadingAll: false,
+      loadingCountries: false,
+      all: {
+        cases: 0,
+        deaths: 0,
+        recovered: 0
+      },
       countries: [],
-      states: [],
       filters: {
-        state: { value: "", keys: ["loc"] }
+        country: { value: "", keys: ["country"] }
       }
     };
   },
   mounted() {
+    this.fetchAll();
     this.fetchCountries();
-    this.fetchStates();
+    this.fetchAndRefreshData();
   },
   computed: {
     chartData() {
       return {
-        labels: ["COVID-19 India"],
+        labels: ["COVID-19"],
         datasets: [
           {
             label: "Cases",
             backgroundColor: "orange",
-            data: [this.countries[40].cases]
+            data: [this.all.cases]
           },
           {
             label: "Recovered",
             backgroundColor: "green",
-            data: [this.countries[40].recovered]
+            data: [this.all.recovered]
           },
           {
             label: "Deaths",
             backgroundColor: "red",
-            data: [this.countries[40].deaths]
+            data: [this.all.deaths]
           }
         ]
       };
     }
   },
   methods: {
-    fetchStates: async function() {
-      this.loadingState = true;
+    fetchAll: async function() {
+      this.loadingAll = true;
       try {
-        var response = await axios.get(
-          "https://api.rootnet.in/covid19-in/stats/latest"
-        );
+        var response = await axios.get("https://corona.lmao.ninja/all");
 
-        this.states = response.data.data.regional;
-        this.loadingState = false;
+        this.all = response.data;
+        this.loadingAll = false;
+        this.getCountry("India");
       } catch (error) {}
     },
     fetchCountries: async function() {
@@ -159,12 +180,12 @@ export default {
 
       return filtered.length > 0 ? filtered[0] : {};
     },
-    getState(stateName) {
-      var filtered = this.states.filter(loc => {
-        return states.regional.loc == stateName;
-      });
-
-      return filtered.length > 0 ? filtered[0] : [];
+    fetchAndRefreshData() {
+      setTimeout(() => {
+        this.fetchAll();
+        this.fetchCountries();
+        this.fetchAndRefreshData();
+      }, 60000);
     }
   }
 };

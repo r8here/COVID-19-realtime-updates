@@ -1,18 +1,19 @@
 <template>
-  <div>
+  <div class="card">
+    <h2>Authorized Gov. Helplines</h2>
+    <hr class="divider" />
     <!-- Search field -->
     <div class="card affix">
-      <h3>Authorized Gov. Helplines</h3>
       <label>Filter by: </label>
       <input
-        class="form-control"
+        class="search-input"
         v-model="filters.helpline.value"
         placeholder="State Name"
       />
     </div>
 
     <!-- Display State-wise data -->
-    <div class="table" v-if="!loadingHelpline">
+    <div class="table--helpline" v-if="!loadingHelpline">
       <v-table class="text-white" :data="helplines" :filters="filters">
         <thead slot="head">
           <th class="text-left">State</th>
@@ -21,7 +22,7 @@
         <tbody slot="body" slot-scope="{ displayData }">
           <tr v-for="(helpline, index) in displayData" :key="index">
             <td class="text-left">{{ helpline.loc }}</td>
-            <td class="text-right">{{ helpline.number }}</td>
+            <td class="text-left">{{ helpline.number }}</td>
           </tr>
         </tbody>
       </v-table>
@@ -80,7 +81,6 @@ export default {
         );
 
         this.helplines = response.data.data.contacts.regional;
-        console.log(this.helplines);
         this.loadingHelpline = false;
       } catch (error) {}
     },
@@ -94,3 +94,20 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.table--helpline {
+  table {
+    table-layout: fixed !important;
+    border-collapse: collapse;
+    th {
+      background-color: #032948;
+    }
+    th,
+    td {
+      border: 1px solid #07416f;
+      padding: 5px 15px;
+    }
+  }
+}
+</style>

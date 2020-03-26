@@ -1,11 +1,11 @@
 <template>
   <div class="small">
-    <h3>World</h3>
     <Bar
       :chart-data="chartData"
       :options="{ responsive: true, maintainAspectRatio: false }"
+      :width='200'
+      :height='200'
     />
-    <hr class="divider" />
   </div>
 </template>
 
@@ -28,5 +28,3 @@ export default {
   }
 };
 </script>
-
-<style></style>
