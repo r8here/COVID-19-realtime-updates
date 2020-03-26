@@ -1,11 +1,13 @@
 <template>
   <div>
-    <div class="_2_col--grid">
+    <div class="_3_col--grid">
+      <!-- State -->
+      <india-state />
       <!-- Left column -->
       <div>
         <!-- Global data chart -->
         <div class="card">
-          <DataBarChart v-if="all" :chart-data="chartData" />
+          <data-bar-chart v-if="all" :chart-data="chartData" />
         </div>
       </div>
 
@@ -126,6 +128,9 @@
           </content-loader>
         </div>
       </div>
+
+      
+
     </div>
   </div>
 </template>
@@ -134,10 +139,12 @@
 import axios from "axios";
 import { ContentLoader } from "vue-content-loader";
 import DataBarChart from "./DataBarChart";
+import IndiaState from './IndiaState'
 export default {
   name: "Index",
   components: {
     ContentLoader,
+    IndiaState,
     DataBarChart
   },
   props: {
