@@ -2,6 +2,7 @@
   <div>
     <div class="_3_col--grid">
       <!-- State -->
+      <Helplines />
       <india-state />
       <!-- Left column -->
       <div>
@@ -140,11 +141,13 @@ import axios from "axios";
 import { ContentLoader } from "vue-content-loader";
 import DataBarChart from "./DataBarChart";
 import IndiaState from './IndiaState'
+import Helplines from './Helplines'
 export default {
   name: "Index",
   components: {
     ContentLoader,
     IndiaState,
+    Helplines,
     DataBarChart
   },
   props: {
