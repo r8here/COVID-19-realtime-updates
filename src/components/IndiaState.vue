@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- {{ state.regional["0"].loc }} -->
     <!-- Search field -->
     <div class="card affix">
+      <h3>India</h3>
       <label>Filter by: </label>
       <input
         class="form-control"
@@ -16,13 +16,19 @@
       <v-table class="text-white" :data="states" :filters="filters">
         <thead slot="head">
           <th class="text-left">State</th>
-          <th>Cases</th>          
+          <th>Cases (Indian)</th>
+          <th>Cases (Foreigner)</th>
           <th>Discharged/Recovered</th>
         </thead>
         <tbody slot="body" slot-scope="{ displayData }">
           <tr v-for="(state, index) in displayData" :key="index">
             <td class="text-left">{{ state.loc }}</td>
-            <td class="text-right">{{ state.confirmedCasesForeign  + state.confirmedCasesIndian}}</td>            
+            <td class="text-right">
+              {{ state.confirmedCasesIndian }}
+            </td>
+            <td class="text-right">
+              {{ state.confirmedCasesForeign }}
+            </td>
             <td class="text-right">{{ state.discharged }}</td>
           </tr>
         </tbody>
@@ -30,7 +36,7 @@
     </div>
 
     <!-- Placeholder loader -->
-    <!-- <div v-else class="card">
+    <div v-else class="card">
       <content-loader
         width="300"
         height="400"
@@ -45,7 +51,7 @@
         <rect x="15" y="60" rx="0" ry="0" width="307" height="6" />
         <rect x="15" y="50" rx="0" ry="0" width="299" height="6" />
       </content-loader>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -81,8 +87,7 @@ export default {
           "https://api.rootnet.in/covid19-in/stats/latest"
         );
 
-		
-		this.states = response.data.data.regional;        
+        this.states = response.data.data.regional;
         this.loadingState = false;
       } catch (error) {}
     },
