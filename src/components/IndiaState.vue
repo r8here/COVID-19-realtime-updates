@@ -1,0 +1,98 @@
+<template>
+  <div>
+    <!-- {{ state.regional["0"].loc }} -->
+    <!-- Search field -->
+    <div class="card affix">
+      <label>Filter by: </label>
+      <input
+        class="form-control"
+        v-model="filters.state.value"
+        placeholder="State Name"
+      />
+    </div>
+
+    <!-- Display State-wise data -->
+    <div class="table" v-if="!loadingState">
+      <v-table class="text-white" :data="states" :filters="filters">
+        <thead slot="head">
+          <th class="text-left">State</th>
+          <th>Cases</th>          
+          <th>Discharged/Recovered</th>
+        </thead>
+        <tbody slot="body" slot-scope="{ displayData }">
+          <tr v-for="(state, index) in displayData" :key="index">
+            <td class="text-left">{{ state.loc }}</td>
+            <td class="text-right">{{ state.confirmedCasesForeign  + state.confirmedCasesIndian}}</td>            
+            <td class="text-right">{{ state.discharged }}</td>
+          </tr>
+        </tbody>
+      </v-table>
+    </div>
+
+    <!-- Placeholder loader -->
+    <!-- <div v-else class="card">
+      <content-loader
+        width="300"
+        height="400"
+        :speed="2"
+        primaryColor="#032948"
+        secondaryColor="#07416f"
+      >
+        <rect x="15" y="10" rx="0" ry="0" width="295" height="6" />
+        <rect x="15" y="20" rx="0" ry="0" width="290" height="6" />
+        <rect x="15" y="30" rx="0" ry="0" width="295" height="6" />
+        <rect x="15" y="40" rx="0" ry="0" width="295" height="6" />
+        <rect x="15" y="60" rx="0" ry="0" width="307" height="6" />
+        <rect x="15" y="50" rx="0" ry="0" width="299" height="6" />
+      </content-loader>
+    </div> -->
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+import { ContentLoader } from "vue-content-loader";
+export default {
+  name: "india-state",
+  components: {
+    ContentLoader
+  },
+  props: {
+    msg: String
+  },
+  data() {
+    return {
+      loadingState: false,
+      states: [],
+      filters: {
+        state: { value: "", keys: ["loc"] }
+      }
+    };
+  },
+  mounted() {
+    this.fetchStates();
+  },
+
+  methods: {
+    fetchStates: async function() {
+      this.loadingState = true;
+      try {
+        var response = await axios.get(
+          "https://api.rootnet.in/covid19-in/stats/latest"
+        );
+
+		
+		this.states = response.data.data.regional;        
+        this.loadingState = false;
+      } catch (error) {}
+    },
+    getState(stateName) {
+      var filtered = this.states.filter(loc => {
+        return states.regional.loc == stateName;
+      });
+
+      return filtered.length > 0 ? filtered[0] : [];
+    }
+  }
+};
+</script>
