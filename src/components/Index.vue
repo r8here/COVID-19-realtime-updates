@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="_3_col--grid">
-      <WorldWide />
+      <Helplines />
 
       <india-state />
 
-      <Helplines />
+      <WorldWide />
     </div>
   </div>
 </template>

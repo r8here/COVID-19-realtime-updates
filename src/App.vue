@@ -134,7 +134,7 @@ a,
     margin-bottom: 0.5rem;
   }
   ._3_col--grid {
-    grid-template-columns: repeat(1, auto);
+    grid-template-columns: 1fr;
     grid-gap: 0;
   }
 }

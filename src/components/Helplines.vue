@@ -97,6 +97,9 @@ export default {
 
 <style lang="scss" scoped>
 .table--helpline {
+  max-height: 51rem;
+  overflow: auto;
+
   table {
     table-layout: fixed !important;
     border-collapse: collapse;

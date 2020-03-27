@@ -169,3 +169,10 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  .table {
+    max-height: 30rem;
+    overflow: auto;
+  }
+</style>
