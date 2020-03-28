@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="worldwide">
     <div class="card">
       <!-- Display global data -->
       <h2>World</h2>
       <hr class="divider" />
 
-      <div v-if="!loadingAll" class="_3_col--grid">
+      <div v-if="!loadingAll" class="_3_card_col--grid">
         <h2 class="card fs-2">
           Total Cases:
           <br />
@@ -190,3 +190,17 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+._3_card_col--grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media screen and (max-width: 500px) {
+  ._3_card_col--grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+</style>

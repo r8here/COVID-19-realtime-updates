@@ -10,7 +10,7 @@
 
 <style lang="scss">
 #app {
-  max-width: 65rem;
+  // max-width: 65rem;
   margin: 1rem;
 }
 body {
@@ -65,6 +65,7 @@ a,
   border-radius: 4px;
   margin-top: 0;
 }
+
 .table {
   max-width: 45rem;
   max-height: 30rem;
@@ -117,11 +118,21 @@ a,
   display: grid;
   grid-gap: 1rem;
 }
+.worldwide {
+  grid-area: worldwide;
+}
+.india {
+  grid-area: india;
+}
+.helplines {
+  grid-area: helplines;
+}
 ._3_col--grid {
   @extend .d-grid;
-  grid-template-columns: repeat(3, auto);
-  
+  // grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "worldwide india helplines ";
 }
+
 ._4_col--grid {
   @extend .d-grid;
   grid-template-columns: repeat(4, auto);
@@ -134,8 +145,15 @@ a,
     margin-bottom: 0.5rem;
   }
   ._3_col--grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 
+      "worldwide worldwide worldwide"
+      "india india india"
+      "helplines helplines helplines";
     grid-gap: 0;
+  }
+  ._4_col--grid {
+    grid-template-columns: repeat(1, auto);
   }
 }
 </style>

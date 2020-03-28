@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="india">
     <!-- Display single country data -->
     <div class="card">
       <h2>India</h2>
@@ -169,10 +169,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-  .table {
-    max-height: 30rem;
-    overflow: auto;
-  }
-</style>
